@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "840226120315",
+    "firebase_url": "https://smartboss-3badb.firebaseio.com",
+    "project_id": "smartboss-3badb",
+    "storage_bucket": "smartboss-3badb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840226120315:android:989c5a1a1b888fd8",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840226120315-8ltgp4offb0qs9fuq3glvftrv7r653gs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzch-z5-7Cu4v51kg4dLWsruQvJapl_ys"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

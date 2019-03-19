@@ -114,7 +114,13 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
 
 
   Future<void> sendPasswordReset(String email) async {
-    await FirebaseAuth.instance.sendPasswordResetEmail(email: "johntylercooper@icloud.com");
+    final formState = _formKey.currentState;
+
+
+    if (formState.validate()) {
+      formState.save();
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: _email);
+    }
   }
 
 }

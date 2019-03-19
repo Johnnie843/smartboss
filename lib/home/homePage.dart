@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
               color: Colors.white,
               icon: Icon(Icons.exit_to_app), onPressed: () {
-
+                FirebaseAuth.instance.signOut();
                 Navigator.of(context).pushNamed(LoginPage.tag);
               }
            )

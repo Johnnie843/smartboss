@@ -3,6 +3,7 @@ import 'package:myapp/login/loginPage.dart';
 import 'package:myapp/home/homePage.dart';
 import 'package:myapp/createAccount/createBusinessAccountPage.dart';
 import 'package:myapp/createAccount/createAccountPage.dart';
+import 'package:myapp/createAccount/createEmployeeAccountPage.dart';
 
 
 void main() => runApp(MyApp());
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
     HomePage.tag: (context)=>HomePage(),
     CreateBusinessAccountPage.tag: (context)=>CreateBusinessAccountPage(),
     CreateAccountPage.tag: (context)=>CreateAccountPage(),
+    CreateEmployeeAccountPage.tag:  (context)=>CreateEmployeeAccountPage()
 
   };
 

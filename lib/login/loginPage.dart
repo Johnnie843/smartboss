@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:myapp/home/homePage.dart';
 import 'package:myapp/createAccount/createBusinessAccountPage.dart';
 import 'package:myapp/createAccount/createAccountPage.dart';
+import 'package:myapp/login/forgotPasswordDialog.dart';
 
 
 
 class LoginPage extends StatefulWidget {
 
   static String tag = 'login-page';
+
+
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -21,6 +24,15 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+
+
+    Future _openForgotPasswordDialog() async{
+      await Navigator.of(context).push(MaterialPageRoute(builder: (context) => ForgotPasswordDialog(), fullscreenDialog: true));
+    }
+
+    Future _openCreateAccountDialog() async{
+      await Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateAccountPage(), fullscreenDialog: true));
+    }
 
     final logo = Hero(
       tag: 'hero',
@@ -85,9 +97,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    Future _openCreateAccountDialog() async{
-      await Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateAccountPage(), fullscreenDialog: true));
-    }
+
 
     final createAccountButton = FlatButton(
       child: Text(
@@ -102,7 +112,9 @@ class _LoginPageState extends State<LoginPage> {
         'Forgot Password?',
         style: TextStyle(color: Colors.lightBlue),
       ),
-      onPressed: (){},
+      onPressed: (){
+        _openForgotPasswordDialog();
+        },
     );
 
     return Scaffold(
@@ -144,6 +156,8 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ));
   }
+
+
 
 
 

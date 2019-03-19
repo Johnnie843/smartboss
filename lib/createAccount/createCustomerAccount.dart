@@ -6,18 +6,18 @@ import 'package:myapp/login/loginPage.dart';
 
 
 
-class CreateBusinessAccountPage extends StatefulWidget {
+class CreateCustomerAccountPage extends StatefulWidget {
 
-  static String tag = 'create-business-account-page';
+  static String tag = 'create-customer-account-page';
 
 
   @override
-  _CreateBusinessAccountPageState createState() => _CreateBusinessAccountPageState();
+  _CreateCustomerAccountPageState createState() => _CreateCustomerAccountPageState();
 }
 
-class _CreateBusinessAccountPageState extends State<CreateBusinessAccountPage> {
+class _CreateCustomerAccountPageState extends State<CreateCustomerAccountPage> {
 
-  String _email, _password, _fname, _lname, _buisnessName;
+  String _email, _password, _fname, _lname;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
@@ -65,15 +65,6 @@ class _CreateBusinessAccountPageState extends State<CreateBusinessAccountPage> {
           OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
-    final businessName = TextFormField(
-      autofocus: false,
-      onSaved: (input) => _buisnessName = input,
-      decoration: InputDecoration(
-          labelText: 'Business Name',
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
 
     final firstName = TextFormField(
       autofocus: false,
@@ -121,34 +112,32 @@ class _CreateBusinessAccountPageState extends State<CreateBusinessAccountPage> {
 
     return Scaffold(
         appBar: new AppBar(
-          title: new Text("Create a Business Account"),
+          title: new Text("Create a Customer Account"),
         ),
         backgroundColor: Colors.white,
         body:
-            Form(
-                key: _formKey,
-                child: ListView(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.only(left: 24.0, right: 24.0),
-                    children: <Widget>[
-                      SizedBox(height: 28.0),
-                      email,
-                      SizedBox(height: 12.0),
-                      password,
-                      SizedBox(height: 12.0),
-                      businessName,
-                      SizedBox(height: 12.0),
-                      firstName,
-                      SizedBox(height: 12.0),
-                      lastName,
-                      SizedBox(height: 14.0),
-                      submitButton,
-                      SizedBox(height: 14.0),
-                      logo
-                    ],
-                  ),
-                )
-        );
+        Form(
+          key: _formKey,
+          child: ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.only(left: 24.0, right: 24.0),
+            children: <Widget>[
+              SizedBox(height: 28.0),
+              email,
+              SizedBox(height: 12.0),
+              password,
+              SizedBox(height: 12.0),
+              firstName,
+              SizedBox(height: 12.0),
+              lastName,
+              SizedBox(height: 14.0),
+              submitButton,
+              SizedBox(height: 14.0),
+              logo
+            ],
+          ),
+        )
+    );
   }
 
 
@@ -162,13 +151,11 @@ class _CreateBusinessAccountPageState extends State<CreateBusinessAccountPage> {
 
         FirebaseUser user = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: _email, password: _password);
-       // user.sendEmailVerification();
+        // user.sendEmailVerification();
 
         Firestore.instance.runTransaction((Transaction transaction)async{
 
-          Firestore.instance.collection("users").document(user.uid).setData({"userType":1,"fname":_fname,"lname":_lname, },merge: true);
-          Firestore.instance.collection("business").document().setData({"name":_buisnessName, "owner":user.uid},merge: true);
-
+          Firestore.instance.collection("users").document(user.uid).setData({"userType":3,"fname":_fname,"lname":_lname, },merge: true);
         });
 
 

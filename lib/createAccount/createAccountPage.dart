@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:myapp/createAccount/createBusinessAccountPage.dart';
-
+import 'package:myapp/createAccount/createEmployeeAccountPage.dart';
+import 'package:myapp/createAccount/createCustomerAccount.dart';
 
 
 
@@ -23,6 +24,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
     Future _openCreateBusinessAccountDialog() async{
       await Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateBusinessAccountPage(), fullscreenDialog: true));
+    }
+
+    Future _openCreateEmployeeAccountDialog() async{
+      await Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateEmployeeAccountPage(), fullscreenDialog: true));
+    }
+
+    Future _openCreateCustomerAccountDialog() async{
+      await Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateCustomerAccountPage(), fullscreenDialog: true));
     }
 
     final logo = Hero(
@@ -66,6 +75,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
             minWidth: 200.0,
             height: 42.0,
             onPressed: () {
+              _openCreateEmployeeAccountDialog();
             },
             color: Colors.lightBlueAccent,
             child: Text(
@@ -86,6 +96,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
             minWidth: 200.0,
             height: 42.0,
             onPressed: () {
+              _openCreateCustomerAccountDialog();
             },
             color: Colors.lightBlueAccent,
             child: Text(

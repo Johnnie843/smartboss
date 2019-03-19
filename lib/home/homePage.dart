@@ -99,8 +99,10 @@ class _HomePageState extends State<HomePage> {
           IconButton(
               color: Colors.white,
               icon: Icon(Icons.exit_to_app), onPressed: () {
-            Navigator.of(context).pushNamed(LoginPage.tag);
-          })
+
+                Navigator.of(context).pushNamed(LoginPage.tag);
+              }
+           )
         ],
       ),
       backgroundColor: Colors.white,

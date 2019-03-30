@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'package:myapp/home/homePage.dart';
-import 'package:myapp/createAccount/createBusinessAccountPage.dart';
-import 'package:myapp/createAccount/createAccountPage.dart';
-import 'package:myapp/login/forgotPasswordDialog.dart';
+import 'package:myapp/pages/HomePage.dart';
+import 'package:myapp/pages/dialogs/CreateBusinessAccountPage.dart';
+import 'package:myapp/pages/dialogs/CreateEmployeeAccountPage.dart';
+import 'package:myapp/pages/CreateAccountPage.dart';
+import 'package:myapp/pages/dialogs/ForgotPasswordDialog.dart';
 
 
 
@@ -13,13 +14,13 @@ class LoginPage extends StatefulWidget {
 
   static String tag = 'login-page';
 
-
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+
   String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
@@ -56,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
           labelText: 'Email',
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
     final password = TextFormField(
@@ -73,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
           labelText: 'Password',
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
     final loginButton = Padding(
@@ -87,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
             minWidth: 200.0,
             height: 42.0,
             onPressed: () {
-                signInFirebaseValidation();
+              signInFirebaseValidation();
             },
             color: Colors.lightBlueAccent,
             child: Text(
@@ -103,8 +104,8 @@ class _LoginPageState extends State<LoginPage> {
       child: Text(
         'Create An Account',
         style: TextStyle(color: Colors.lightBlue),
-        ),
-        onPressed: (){_openCreateAccountDialog();},
+      ),
+      onPressed: (){_openCreateAccountDialog();},
     );
 
     final forgotPassword = FlatButton(
@@ -114,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       onPressed: (){
         _openForgotPasswordDialog();
-        },
+      },
     );
 
     return Scaffold(
@@ -126,44 +127,40 @@ class _LoginPageState extends State<LoginPage> {
                 image: new DecorationImage(
                   image: new AssetImage("assets/images/background.png"),
                   fit: BoxFit.fill,
-                    colorFilter: new ColorFilter.mode(Colors.white.withOpacity(0.4), BlendMode.dstATop),
+                  colorFilter: new ColorFilter.mode(Colors.white.withOpacity(0.4), BlendMode.dstATop),
                 ),
               ),
             ),
             Form(
-              key: _formKey,
-              child: Center(
-              child: ListView(
-                shrinkWrap: true,
-                padding: EdgeInsets.only(left: 24.0, right: 24.0),
-                children: <Widget>[
-                  logo,
-                  SizedBox(height: 14.0),
-                  email,
-                  SizedBox(height: 8.0),
-                  password,
-                  SizedBox(height: 8.0),
-                  loginButton,
-                  Row(
-                    mainAxisAlignment:MainAxisAlignment.center,
+                key: _formKey,
+                child: Center(
+                  child: ListView(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.only(left: 24.0, right: 24.0),
                     children: <Widget>[
-                    Container(child: forgotPassword),
-                    Container(child: createAccountButton)
-                  ],)
-                ],
-              ),
-            ))
+                      logo,
+                      SizedBox(height: 14.0),
+                      email,
+                      SizedBox(height: 8.0),
+                      password,
+                      SizedBox(height: 8.0),
+                      loginButton,
+                      Row(
+                        mainAxisAlignment:MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(child: forgotPassword),
+                          Container(child: createAccountButton)
+                        ],)
+                    ],
+                  ),
+                ))
           ],
         ));
   }
 
-
-
-
-
   Future<void> signInFirebaseValidation() async{
-    final formState = _formKey.currentState;
 
+    final formState = _formKey.currentState;
 
     if(formState.validate()){
 
@@ -171,8 +168,7 @@ class _LoginPageState extends State<LoginPage> {
       try {
         FirebaseUser user = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password);
-
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(user: user,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(user: user)));
       }
       catch(e){
         print(e.message);

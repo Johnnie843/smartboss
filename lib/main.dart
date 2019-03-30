@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/login/loginPage.dart';
-import 'package:myapp/home/homePage.dart';
-import 'package:myapp/createAccount/createBusinessAccountPage.dart';
-import 'package:myapp/createAccount/createAccountPage.dart';
-import 'package:myapp/createAccount/createEmployeeAccountPage.dart';
+
+
+import 'package:myapp/pages/LoginPage.dart';
+import 'package:myapp/pages/HomePage.dart';
+import 'package:myapp/pages/dialogs/CreateBusinessAccountPage.dart';
+import 'package:myapp/pages/CreateAccountPage.dart';
+import 'package:myapp/pages/dialogs/CreateEmployeeAccountPage.dart';
 
 
 void main() => runApp(MyApp());

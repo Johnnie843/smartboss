@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:myapp/login/loginPage.dart';
-
-
+import 'package:myapp/pages/LoginPage.dart';
 
 
 class ForgotPasswordDialog extends StatefulWidget {
@@ -21,7 +19,6 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-
 
 
 

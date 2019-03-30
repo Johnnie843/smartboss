@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:myapp/createAccount/createBusinessAccountPage.dart';
-import 'package:myapp/createAccount/createEmployeeAccountPage.dart';
-import 'package:myapp/createAccount/createCustomerAccount.dart';
+
+
+import 'package:myapp/pages/dialogs/CreateBusinessAccountPage.dart';
+import 'package:myapp/pages/dialogs/CreateEmployeeAccountPage.dart';
+import 'package:myapp/pages/dialogs/CreateCustomerAccount.dart';
 
 
 
@@ -124,8 +126,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               Text("What kind of account do you want to create?",
                   textAlign: TextAlign.center,
                   style:TextStyle(
-                    fontSize: 32.0,
-                    color: Colors.lightBlue)
+                      fontSize: 32.0,
+                      color: Colors.lightBlue)
               ),
               SizedBox(height: 10.0),
               employeeButton,

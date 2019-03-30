@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
-import 'package:myapp/login/loginPage.dart';
+
+import 'package:myapp/pages/LoginPage.dart';
 
 
 
@@ -125,30 +125,30 @@ class _CreateBusinessAccountPageState extends State<CreateBusinessAccountPage> {
         ),
         backgroundColor: Colors.white,
         body:
-            Form(
-                key: _formKey,
-                child: ListView(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.only(left: 24.0, right: 24.0),
-                    children: <Widget>[
-                      SizedBox(height: 28.0),
-                      email,
-                      SizedBox(height: 12.0),
-                      password,
-                      SizedBox(height: 12.0),
-                      businessName,
-                      SizedBox(height: 12.0),
-                      firstName,
-                      SizedBox(height: 12.0),
-                      lastName,
-                      SizedBox(height: 14.0),
-                      submitButton,
-                      SizedBox(height: 14.0),
-                      logo
-                    ],
-                  ),
-                )
-        );
+        Form(
+          key: _formKey,
+          child: ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.only(left: 24.0, right: 24.0),
+            children: <Widget>[
+              SizedBox(height: 28.0),
+              email,
+              SizedBox(height: 12.0),
+              password,
+              SizedBox(height: 12.0),
+              businessName,
+              SizedBox(height: 12.0),
+              firstName,
+              SizedBox(height: 12.0),
+              lastName,
+              SizedBox(height: 14.0),
+              submitButton,
+              SizedBox(height: 14.0),
+              logo
+            ],
+          ),
+        )
+    );
   }
 
 
@@ -162,7 +162,7 @@ class _CreateBusinessAccountPageState extends State<CreateBusinessAccountPage> {
 
         FirebaseUser user = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: _email, password: _password);
-       // user.sendEmailVerification();
+        // user.sendEmailVerification();
 
         Firestore.instance.runTransaction((Transaction transaction)async{
 

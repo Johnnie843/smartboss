@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
         elevation: 5.0,
         child: MaterialButton(
             minWidth: 200.0,
-            height: 42.0,
+            height: 45.0,
             onPressed: () {
               signInFirebaseValidation();
             },
@@ -109,6 +109,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final forgotPassword = FlatButton(
+
       child: Text(
         'Forgot Password?',
         style: TextStyle(color: Colors.lightBlue),
@@ -127,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                 image: new DecorationImage(
                   image: new AssetImage("assets/images/background.png"),
                   fit: BoxFit.fill,
-                  colorFilter: new ColorFilter.mode(Colors.white.withOpacity(0.4), BlendMode.dstATop),
+                  colorFilter: new ColorFilter.mode(Colors.white.withOpacity(0.7), BlendMode.dstATop),
                 ),
               ),
             ),
@@ -138,6 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                     shrinkWrap: true,
                     padding: EdgeInsets.only(left: 24.0, right: 24.0),
                     children: <Widget>[
+                      SizedBox(height: 100.0),
                       logo,
                       SizedBox(height: 14.0),
                       email,
@@ -146,11 +148,13 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: 8.0),
                       loginButton,
                       Row(
-                        mainAxisAlignment:MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Container(child: forgotPassword),
-                          Container(child: createAccountButton)
-                        ],)
+
+                          Container(child: createAccountButton,),
+                          Container(child: forgotPassword,)
+                        ],
+                      )
                     ],
                   ),
                 ))

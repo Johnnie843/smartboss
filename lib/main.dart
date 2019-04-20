@@ -6,6 +6,7 @@ import 'package:myapp/pages/HomePage.dart';
 import 'package:myapp/pages/dialogs/CreateBusinessAccountPage.dart';
 import 'package:myapp/pages/CreateAccountPage.dart';
 import 'package:myapp/pages/dialogs/CreateEmployeeAccountPage.dart';
+import 'package:myapp/pages/ProfilePage.dart';
 
 
 void main() => runApp(MyApp());
@@ -17,8 +18,8 @@ class MyApp extends StatelessWidget {
     HomePage.tag: (context)=>HomePage(),
     CreateBusinessAccountPage.tag: (context)=>CreateBusinessAccountPage(),
     CreateAccountPage.tag: (context)=>CreateAccountPage(),
-    CreateEmployeeAccountPage.tag:  (context)=>CreateEmployeeAccountPage()
-
+    CreateEmployeeAccountPage.tag:  (context)=>CreateEmployeeAccountPage(),
+    ProfilePage.tag: (context)=>ProfilePage(),
   };
 
   @override

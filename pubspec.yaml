@@ -20,6 +20,7 @@ dependencies:
   firebase_auth: ^0.8.1+4
   firebase_analytics:
   cloud_firestore:
+  firebase_storage:
   flutter:
     sdk: flutter
 
@@ -76,3 +77,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
+fonts:
+  - family: Roboto
+    fonts:
+      - asset: assets/fonts/Roboto-Light.ttf
+        weight: 200
+      - asset: assets/fonts/Roboto-Bold.ttf
+        weight: 700

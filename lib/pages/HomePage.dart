@@ -4,7 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:myapp/model/User.dart';
 import 'package:myapp/pages/LoginPage.dart';
-
+import 'package:myapp/firestore/UserService.dart';
+import 'package:myapp/pages/ProfilePage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key, @required this.user}) : super(key: key);
@@ -16,10 +17,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
   User currentUser;
-
+  UserService userDocument = new UserService();
+  QuerySnapshot userInfo;
 
   final routes = <String, WidgetBuilder>{
     LoginPage.tag: (context) => LoginPage(),
@@ -29,17 +29,37 @@ class _HomePageState extends State<HomePage> {
     showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Test"),
-        content: Text("Test"),
-        actions: <Widget>[
-          FlatButton(
-            child: const Text('OK'),
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
+          title: Center(
+            child: Text("Welcome to SmartBoss"),
           ),
-        ],
-      ),
+          content: ButtonBar(children: <Widget>[
+            MaterialButton(
+                minWidth: 100.0,
+                height: 42.0,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ProfilePage(user: widget.user)));
+                },
+                color: Colors.lightBlueAccent,
+                child: Text(
+                  "Edit Profile",
+                  style: TextStyle(color: Colors.white),
+                )),
+            MaterialButton(
+                minWidth: 100.0,
+                height: 42.0,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                color: Colors.lightBlueAccent,
+                child: Text(
+                  "Main Menu",
+                  style: TextStyle(color: Colors.white),
+                ))
+          ])),
     );
   }
 
@@ -61,79 +81,80 @@ class _HomePageState extends State<HomePage> {
     return Center(child: Text("Customer"));
   }
 
-  @override
-  Widget _buildAdminHomeScreen(BuildContext context) {
-    return Container(
-      child: Text("Welcome"),
-    );
+  Widget _buildProfile(Size screenSize) {
+    return Center(child: Text(""));
   }
 
   @override
-  Widget _buildActionBar(BuildContext context) {
-    return Container();
+  void initState() {
+    userDocument.getUserProfile(widget.user.uid).then((user) {
+      print("Init HomePage ${user.describeUser()}");
+      setState(() {
+        currentUser = user;
+        if (currentUser.newUserGet) {
+          showNewUserDialog(context);
+        }
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
 
+    Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
-        appBar: AppBar(
-          title: Text('SmartBoss'),
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(icon: Icon(Icons.dashboard), onPressed: null);
-            },
-          ),
-          actions: <Widget>[
-            IconButton(icon: Icon(Icons.message), onPressed: null),
-            IconButton(
-                icon: new Stack(
-                  children: <Widget>[
-                    new Icon(Icons.account_circle),
-                    new Positioned(
-                      top: 0.0,
-                      right: 0.0,
-                      child: new Icon(
-                        Icons.brightness_1,
-                        size: 8.0,
-                        color: Colors.redAccent,
-                      ),
-                    )
-                  ],
-                ),
-                onPressed: null),
-            IconButton(
+      appBar: AppBar(
+        title: Text('SmartBoss'),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+                icon: Icon(Icons.dashboard),
                 color: Colors.white,
-                icon: Icon(Icons.exit_to_app),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.of(context).pushNamed(LoginPage.tag);
-                })
-          ],
+                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(user: widget.user)));});
+          },
         ),
-        backgroundColor: Colors.white,
-        body: StreamBuilder(
-            stream: Firestore.instance.collection("users").document("${widget.user.uid}").snapshots(),
-            builder: (context, snapshot) {
-              currentUser = new User(widget.user.uid, snapshot.data["fname"] , snapshot.data["lname"] , snapshot.data["newUser"] , snapshot.data["userType"]);
+        actions: <Widget>[
+          IconButton(
+              icon: new Stack(
+                children: <Widget>[
+                  new Icon(Icons.message),
+                  new Positioned(
+                    top: 0.0,
+                    right: 0.0,
+                    child: new Icon(
+                      Icons.brightness_1,
+                      size: 8.0,
+                      color: Colors.redAccent,
+                    ),
+                  )
+                ],
+              ),
+              onPressed: null),
+          IconButton(
+              color: Colors.white,
+              icon: Icon(Icons.account_circle),
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage(user: widget.user)));}),
+          IconButton(
+              color: Colors.white,
+              icon: Icon(Icons.exit_to_app),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushNamed(LoginPage.tag);
+              })
+        ],
+      ),
+      backgroundColor: Colors.white,
+      body: StreamBuilder(
+          stream: Firestore.instance
+              .collection("users")
+              .document("${widget.user.uid}")
+              .snapshots(),
+          builder: (context, snapshot) {
+            return _buildProfile(screenSize);
 
-              if (!snapshot.hasData) return const CircularProgressIndicator();
-
-              if (snapshot.data["userType"] == 0) {
-                return _buildAdminHomeScreen(context);
-              }
-              else if (snapshot.data["userType"] == 1){
-                return _buildContractorHomeScreen(context, snapshot.data);
-              }
-              else if (snapshot.data["userType"] == 2){
-                return _buildEmployeeHomeScreen(context, snapshot.data);
-              }
-              else{
-                return _buildCustomerHomeScreen(context, snapshot.data);
-              }
-
-            })
-
+          }),
     );
   }
 }
+

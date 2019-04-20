@@ -10,6 +10,7 @@ class User{
     int _userType;
 
     User(String uid, String fname, String lname, bool newUser, int userType){
+
          _uid = uid;
          _fname = fname;
          _lname = lname;

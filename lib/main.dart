@@ -7,6 +7,9 @@ import 'package:myapp/pages/dialogs/CreateBusinessAccountPage.dart';
 import 'package:myapp/pages/CreateAccountPage.dart';
 import 'package:myapp/pages/dialogs/CreateEmployeeAccountPage.dart';
 import 'package:myapp/pages/ProfilePage.dart';
+import 'package:myapp/pages/BusinessProfilePage.dart';
+import 'package:myapp/pages/HireEmployeePage.dart';
+import 'package:myapp/pages/ManageBusinessPage.dart';
 
 
 void main() => runApp(MyApp());
@@ -14,12 +17,17 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
 
   final routes = <String, WidgetBuilder>{
+
     LoginPage.tag: (context)=>LoginPage(),
     HomePage.tag: (context)=>HomePage(),
     CreateBusinessAccountPage.tag: (context)=>CreateBusinessAccountPage(),
     CreateAccountPage.tag: (context)=>CreateAccountPage(),
     CreateEmployeeAccountPage.tag:  (context)=>CreateEmployeeAccountPage(),
     ProfilePage.tag: (context)=>ProfilePage(),
+    BusinessProfilePage.tag: (context)=>BusinessProfilePage(),
+    ManageBusinessPage.tag: (context)=> ManageBusinessPage(),
+    HireEmployeePage.tag: (context)=>HireEmployeePage()
+
   };
 
   @override

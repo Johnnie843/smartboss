@@ -8,14 +8,19 @@ class User{
     String _lname;
     bool _newUser;
     int _userType;
+    String _email;
+    String _autocomplete;
 
-    User(String uid, String fname, String lname, bool newUser, int userType){
+
+    User(String uid, String email, String fname, String lname, bool newUser, int userType){
 
          _uid = uid;
          _fname = fname;
          _lname = lname;
          _newUser = newUser;
          _userType = userType;
+         _email = email;
+
     }
 
     set uidSet(String uid){
@@ -58,8 +63,16 @@ class User{
       return _userType;
     }
 
+    set userEmailSet(int userType){
+      _userType = userType;
+    }
+
+    String get userEmailGet{
+      return _email;
+    }
+
     String describeUser(){
-      return ("UID: $_uid | fname: $_fname | lname: $_lname | newUser: $_newUser | userType: $_userType");
+      return ("UID: $_uid | fname: $_fname | lname: $_lname | newUser: $_newUser | userType: $_userType | emai: $_email");
     }
 }
 

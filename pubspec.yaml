@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  autocomplete_textfield: ^1.6.4
   firebase_auth: ^0.8.1+4
   firebase_analytics:
   cloud_firestore:

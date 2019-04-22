@@ -11,7 +11,7 @@ class UserService{
     DocumentSnapshot snapshot = await Firestore.instance.collection("users").document(uid).get();
 
 
-    currentUser = new User(uid, snapshot['fname'], snapshot['lname'], snapshot['newUser'], snapshot['userType']);
+    currentUser = new User(uid, snapshot['email'], snapshot['fname'], snapshot['lname'], snapshot['newUser'], snapshot['userType']);
 
     return currentUser;
 
@@ -26,6 +26,5 @@ class UserService{
         });
 
     }
-
 
 }
